@@ -2,7 +2,7 @@
 title: "Śledzie"
 author: "Marcin Leśnierowski, Bartosz Nawrotek"
 date: "9 12 2019"
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
