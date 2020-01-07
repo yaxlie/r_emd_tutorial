@@ -53,6 +53,18 @@ dim(sledz_data)
 head(select(sledz_data, 1:ncol(sledz_data)))
 ```
 
+## Data sampling
+``` {r include=FALSE}
+sledz_sample <- sample(1:nrow(sledz_data), n)
+sledz_sample
+sort(sledz_sample)
+sledz_origin <- sledz_data
+sledz_data <- sledz_data[sledz_sample, ]
+sledz_data
+
+sizes <- toJSON(sledz_data[,2],dataframe="rows")
+```
+
 ## Data info
 
 ### Mean
@@ -88,10 +100,6 @@ cor_mat = cor(cor_mat)
 corrplot(cor_mat, method="circle")
 ```
 
-```{r}
-sizes <- toJSON(sledz_data[,2],dataframe="rows")
-```
-
 ## Interactive picture
 
 <input type="range" min="1" max=`r n` value=cur class="slider" id="myRange">
@@ -121,7 +129,7 @@ slider.oninput = function() {
 # Regression
 
 ``` {r}
-sledz_num = sapply(sledz_data, as.numeric )
+sledz_num = sapply(sledz_origin, as.numeric )
 #sledz_num  <- as.data.frame(t(sledz_num ))
 
 smp_size <- floor(0.75 * nrow(sledz_num))
@@ -152,12 +160,12 @@ model
  
 predictions <- predict(model, test_data)
 
-#RMSE(predictions, test_data)
 ```
 
 # Model summary
 ``` {r}
 summary(model$finalModel)
 ```
+
 
 
